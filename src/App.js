@@ -14,6 +14,8 @@ class App extends Component {
       balance: 0,
       transactions: []
     }
+
+    this.transfer = this.transfer.bind(this);
   }
 
   async componentWillMount() {
@@ -53,6 +55,12 @@ class App extends Component {
     console.log(transactions);
   }
 
+  transfer(recipient, amount) {
+    // Must call send() and pass the sender's address
+    // User need to sign this transaction on MetaMask in order to finalize it on the blockchain
+    this.state.fakeDaiToken.methods.transfer(recipient, amount).send({ from: this.state.account });
+  }
+
   render() {
     return (
       <div>
@@ -73,10 +81,10 @@ class App extends Component {
 
                 <form onSubmit={(event) => {
                   event.preventDefault();
-                  
+
                   const recipient = this.recipient.value;
                   const amount = window.web3.utils.toWei(this.amount.value, 'Ether');
-                  console.log(recipient, amount);
+                  this.transfer(recipient, amount);
                 }}>
                   <div className="form-group mr-sm-2">
                     <input
