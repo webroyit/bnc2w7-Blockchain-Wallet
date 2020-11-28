@@ -106,6 +106,25 @@ class App extends Component {
                   </div>
                   <button type="submit" className="btn btn-primary btn-block">Send</button>
                 </form>
+
+                <table className="table mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Recipient</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    { this.state.transactions.map((tx, key) => {
+                      return (
+                        <tr key={key} >
+                          <td>{tx.returnValues.to}</td>
+                          <td>{window.web3.utils.fromWei(tx.returnValues.value.toString(), 'Ether')}</td>
+                        </tr>
+                      )
+                    }) }
+                  </tbody>
+                </table>
               </div>
             </main>
           </div>
