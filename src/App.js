@@ -45,6 +45,11 @@ class App extends Component {
 
     const balance = await fakeDaiToken.methods.balanceOf(this.state.account).call();
     this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether') });
+
+    // Get the history of transactions from blockchain
+    const transactions = await fakeDaiToken.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account } });
+    this.setState({ transactions: transactions });
+    console.log(transactions);
   }
 
   render() {
