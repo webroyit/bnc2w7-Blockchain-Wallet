@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 
 import './App.css';
+import daiLogo from './dai-logo.png';
 import FakeDaiToken from './abis/FakeDaiToken.json';
 
 class App extends Component {
@@ -63,7 +64,16 @@ class App extends Component {
             BC Wallet
           </a>
         </nav>
-        <h1 className="text-center mt-5">Blockchain Wallet</h1>
+        <div className="container-fluid mt-5">
+          <div className="row">
+            <main role="main" className="col-lg-12 d-flex text-center">
+              <div className="content mr-auto ml-auto" style={{ width: "500px" }}>
+                <img className="my-2" src={daiLogo} width="150" alt="Dai" />
+                <h1>{this.state.balance} DAI</h1>
+              </div>
+            </main>
+          </div>
+        </div>
       </div>
     );
   }
